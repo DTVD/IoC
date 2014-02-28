@@ -1,7 +1,5 @@
 <?php
 
-/* For IoC class */
-require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 class LibraryTest extends PHPUnit_Framework_TestCase{
