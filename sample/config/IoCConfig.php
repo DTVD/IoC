@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 /* Wake up lazy loading */
 class Touchy {
-  public static function touchy()
+  public static function wakeMeUp()
   {
   }
 }
