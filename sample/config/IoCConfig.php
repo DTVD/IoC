@@ -4,13 +4,19 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function standardRegist() {
-  IoC::register('book_license', function($version){
-    return Book::license($version);
-  });
+/* Wake up lazy loading */
+class Touchy {
+  public static function touchy()
+  {
+  }
 }
-standardRegist();
 
+/* Production register */
+IoC::register('book_license', function($version){
+  return Book::license($version);
+});
+
+/* Replacing real classes */
 class IoCBook {
   public static function license($version)
   {

@@ -12,6 +12,7 @@ class Book {
     {
         return $this->author;
     }
+    /* Evil static method */
     public static function license($version)
     {
         return "Licensed book version".$version;

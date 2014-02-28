@@ -11,8 +11,8 @@ class LibraryTest extends PHPUnit_Framework_TestCase{
    */
   public function setUp()
   {
-    /* Touch IoCConfig */
-    standardRegist();
+    /* Wake up lazy loading */
+    Touchy::touchy();
     /* Redefined your desirable mock */
     IoC::register('book_license', function($version){
       return 'mocked license';
@@ -24,7 +24,6 @@ class LibraryTest extends PHPUnit_Framework_TestCase{
    */
   public function tearDown()
   {
-
   }
 
   /**

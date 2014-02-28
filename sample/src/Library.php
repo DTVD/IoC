@@ -11,7 +11,7 @@ class Library {
     return $license. " in overview";
   }
 
-  /* Realife production code */
+  /* Real life production code */
   public function view()
   {
     echo $this->overView("2.0");
