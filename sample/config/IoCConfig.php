@@ -1,8 +1,8 @@
 <?php
 
-/* Not needed while included packagist package */
+/* For IoC class */
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once '../src/Book.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 IoC::register('book_license', function($version){
   return Book::license($version);

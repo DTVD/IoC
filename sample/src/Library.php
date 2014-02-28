@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/IoCConfig.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class Library {
   public function overView($version)

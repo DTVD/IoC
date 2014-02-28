@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 class Book {
     public $author;
     public function setAuthor($author)

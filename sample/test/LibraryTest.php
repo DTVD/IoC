@@ -1,7 +1,6 @@
 <?php
 
-require_once '../config/IoCConfig.php';
-require_once '../src/Library.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class LibraryTest extends PHPUnit_Framework_TestCase{
 

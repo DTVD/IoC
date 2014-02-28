@@ -1,0 +1,24 @@
+{
+    "name": "orakaro/ioc",
+    "description": "Tiny IoC module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "orakaro",
+            "email": "nhatminh_179@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpunit/phpunit": "3.7.*",
+
+    },
+    "autoload": {
+        "classmap": [
+            "src",
+            "config"
+        ],
+        "psr-0": {
+        }
+    }
+}
