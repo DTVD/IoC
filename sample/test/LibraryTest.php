@@ -11,7 +11,10 @@ class LibraryTest extends PHPUnit_Framework_TestCase{
    */
   public function setUp()
   {
-    Ioc::register('book_license', function($version){
+    /* Touch IoCConfig */
+    standardRegist();
+    /* Redefined your desirable mock */
+    IoC::register('book_license', function($version){
       return 'mocked license';
     });
   }
@@ -28,10 +31,10 @@ class LibraryTest extends PHPUnit_Framework_TestCase{
    * test overView method
    * @param  String $version
    */
-  public function testOverView($version)
+  public function testOverView()
   {
     $l = new Library;
-    $this->assertSame('mocked license in overview',$l->overView(2.0));
+    $this->assertSame('mocked license in overview',$l->overView("1.0"));
   }
 }
 
