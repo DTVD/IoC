@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 class Book {
     public $author;
     public function setAuthor($author)
@@ -22,7 +24,7 @@ IoC::register('book',function(){
 $book1 = IoC::resolve('book');
 $book2 = IoC::resolve('book');
 echo "Register sample\n";
-var_dump($book1===$book2);
+var_dump($book1()===$book2());
 
 // Singleton sample. Here $bookSingleton1 and $bookSingleton2 will end up with same instances of class Book
 IoC::singleton('bookSingleton',function(){
