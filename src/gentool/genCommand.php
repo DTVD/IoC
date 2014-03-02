@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use orakaro\IoC\gentool\Template;
 
 
 class GenCommand extends Command
@@ -34,7 +35,6 @@ class GenCommand extends Command
     /* Execute */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $config_file = $input->getArgument('config_file');
         if (!$config_file) {
           $config_file = 'genConfig.php';
@@ -46,19 +46,46 @@ class GenCommand extends Command
         }
 
         $config = require_once $config_file;
-        $dir = $config['config_dir'];
+        $config_dir = $config['config_dir'];
         $staticClasses = $config['static_classes'];
 
         if ($input->getOption('nofolder')) {
-            $dir = '.';
+            $config_dir = '.';
         }
-        $dir = $dir.'/';
 
-        $output->writeln($dir);
-        foreach ($staticClasses as $class => $method) {
-            $output->writeln('Class: ' .$class);
-            $output->writeln('Method: ' .$method);
-        }
+        $output->writeln(Template::genIoCConfig($config_dir,$staticClasses));
+
         return;
     }
+}
+
+class CleanCommand extends Command
+{
+
+    /* Configuration of commands */
+    protected function configure()
+    {
+         $this
+            ->setName('clean:config')
+            ->setDescription('Auto generate IoCConfigFile')
+            ->addArgument(
+                'IoC_config_file_path',
+                InputArgument::OPTIONAL,
+                'What is IoCConfig file path ?'
+            )
+        ;
+    }
+
+    /* Execute */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $IoC_config_file_path = $input->getArgument('IoC_config_file_path');
+        if (!$IoC_config_file_path) {
+            $output->writeln('You have to specify IoCConfig file to delete! ');
+            return;
+        }
+        Template::clean($IoC_config_file_path);
+    }
+
+
 }

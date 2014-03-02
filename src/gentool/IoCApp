@@ -7,4 +7,5 @@ use orakaro\IoC\gentool\GenCommand;
 
 $application = new Application();
 $application->add(new GenCommand);
+$application->add(new CleanCommand);
 $application->run();
