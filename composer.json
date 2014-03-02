@@ -1,6 +1,6 @@
 {
     "name": "orakaro/ioc",
-    "bin": ["gentool"],
+    "bin": ["bin"],
     "description": "Tiny IoC module",
     "license": "MIT",
     "authors": [
