@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php namespace orakaro\IoC\gentool;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Symfony\Component\Console\Application;
+use orakaro\IoC\gentool\GenCommand;
+
+$application = new Application();
+$application->add(new GenCommand);
+$application->run();
