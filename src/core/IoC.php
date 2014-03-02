@@ -1,4 +1,4 @@
-<?php
+<?php namespace orakaro\IoC\core;
 
 /**
  * Inversion Of Control Class
@@ -8,13 +8,13 @@ class IoC {
   protected static $shared = array();
 
   // Register
-  public static function register($name, Closure $resolve)
+  public static function register($name, \Closure $resolve)
   {
      static::$registry[$name] = $resolve;
   }
 
   // Singleton
-  public static function singleton($name, Closure $resolve)
+  public static function singleton($name, \Closure $resolve)
   {
     static::$shared[$name] = $resolve();
   }
