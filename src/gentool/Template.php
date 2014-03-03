@@ -103,6 +103,7 @@ EOT;
 \n
 /* Replacing real classes */
 class IoC{$class}{
+\n
 EOT;
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
