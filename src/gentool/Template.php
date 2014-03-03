@@ -13,7 +13,7 @@ class Template{
         ContentBuilder::bootstrap($autoload_path);
 
         foreach ($staticClasses as $class => $methods) {
-            $methodCollection .= is_array($methods) ? $methods : array($methods);
+            $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::register($class, $methodCollection);
             self::$content .= ContentBuilder::replace($class, $methodCollection);
         }
