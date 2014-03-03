@@ -12,9 +12,15 @@ class Template{
         $autoload_path = str_repeat('/..', $depth). '/vendor/autoload.php';
         ContentBuilder::bootstrap($autoload_path);
 
+        /* Append IoC register */
         foreach ($staticClasses as $class => $methods) {
             $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::register($class, $methodCollection);
+        }
+
+        /* Append IoC class */
+        foreach ($staticClasses as $class => $methods) {
+            $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::replace($class, $methodCollection);
         }
 
@@ -113,11 +119,13 @@ EOT;
         \$registedClosure = IoC::resolve('{$class}_{$method}');
         return \$registedClosure();
     }
+\n
 EOT;
         }
         /* Close class */
         $content .= <<<EOT
 }
+\n
 EOT;
 
         return $content;
