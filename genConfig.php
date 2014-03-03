@@ -7,6 +7,5 @@ return array(
   /* Key is Class name and Value is method */
   'static_classes' => array(
     'Book' => 'license',
-    'Library' => array('name','yard','address'),
   ),
 );
