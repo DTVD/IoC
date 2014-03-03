@@ -14,9 +14,6 @@
         "symfony/console": "2.4.*"
     },
     "autoload": {
-        "classmap": [
-            "src/core"
-        ],
         "psr-4": {
             "orakaro\\IoC\\": "src"
         }
