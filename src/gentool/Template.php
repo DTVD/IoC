@@ -26,16 +26,15 @@ class Template{
     public static function clean($config_dir)
     {
         $filePath = $config_dir.'/IoCConfig.php';
-        $success = $success ?: "Delete : $filePath.\n";
         /* Delete file */
         if ( !unlink($filePath) ){
-            return "Oops - something went wrong!\n";
+            return "Oops - Cannnot delete file !\n";
         } else {
-            $rel = $success;
+            $rel = "Delete : $filePath.\n";
         };
         /* Delete folder */
         if ( !rmdir($config_dir) ){
-            return "Oops - something went wrong!\n";
+            return "Oops - Cannot delete directory !\n";
         } else {
             return $rel;
         };
@@ -44,8 +43,6 @@ class Template{
     /* Write To File function  */
     public static function writeToFile($filePath)
     {
-        $success = $success ?: "Create: $filePath.\n";
-
         if ( file_exists($filePath) ) {
             return "Warning: File already exists at $filePath\n";
         }
@@ -53,7 +50,7 @@ class Template{
         mkdir(dirname($filePath));
 
         if ( file_put_contents($filePath, self::$content) !== false ) {
-            return $success;
+            return "Create: $filePath.\n";
         } else {
             return "Oops - something went wrong!\n";
         }
