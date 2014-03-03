@@ -12,9 +12,10 @@ class Template{
         $autoload_path = str_repeat('/..', $depth). '/vendor/autoload.php';
         ContentBuilder::bootstrap($autoload_path);
 
-        foreach ($staticClasses as $class => $method) {
-            self::$content .= ContentBuilder::register($class, $method);
-            self::$content .= ContentBuilder::replace($class, $method);
+        foreach ($staticClasses as $class => $methods) {
+            $methodCollection .= is_array($methods) ? $methods : array($methods);
+            self::$content .= ContentBuilder::register($class, $methodCollection);
+            self::$content .= ContentBuilder::replace($class, $methodCollection);
         }
 
         $filePath = $config_dir.'/IoCConfig.php';
@@ -77,31 +78,48 @@ EOT;
     }
 
     /* Production Register */
-    public static function register($class,$method)
+    public static function register($class,$methodCollection)
     {
-        return <<<EOT
+        /* Init */
+        $content = '';
+        /* Loop methodCollection */
+        foreach ($methodCollection as $method) {
+        $content .= <<<EOT
 \n
 /* Production register */
 IoC::register('{$class}_{$method}', function(){
     return {$class}::{$method}();
 });
 EOT;
+        }
+        return $content;
     }
 
     /* Replacing real class */
-    public static function replace($class,$method)
+    public static function replace($class,$methodCollection)
     {
-        return <<<EOT
+        /* Class define */
+        $content = <<<EOT
 \n
 /* Replacing real classes */
 class IoC{$class}{
+EOT;
+        /* Loop methodCollection */
+        foreach ($methodCollection as $method) {
+            $content .= <<<EOT
     public static function {$method}()
     {
         \$registedClosure = IoC::resolve('{$class}_{$method}');
         return \$registedClosure();
     }
+EOT;
+        }
+        /* Close class */
+        $content .= <<<EOT
 }
 EOT;
+
+        return $content;
     }
 
 }
