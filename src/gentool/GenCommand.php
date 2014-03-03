@@ -15,11 +15,11 @@ class GenCommand extends Command
     {
         $this
             ->setName('gen:config')
-            ->setDescription('Auto generate IoCConfigFile')
+            ->setDescription('Auto generate IoCConfig.php file base on genConfig.php')
             ->addArgument(
                 'config_file',
                 InputArgument::OPTIONAL,
-                'What is config file path ?'
+                'What is genConfig.php file path ?'
             )
             ->addOption(
                'nofolder',
@@ -39,7 +39,7 @@ class GenCommand extends Command
         }
 
         if (!file_exists($config_file)){
-            $output->writeln('No config file specified and no genConfig.php in this folder! ');
+            $output->writeln('No file specified and no genConfig.php in this folder! ');
             return;
         }
 
