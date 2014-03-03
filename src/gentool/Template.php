@@ -107,7 +107,7 @@ EOT;
         /* Class define */
         $content = <<<EOT
 \n
-/* Create IoC class for ${$class}*/
+/* Create IoC class for {$class}*/
 class IoC{$class}{
 \n
 EOT;
