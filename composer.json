@@ -1,6 +1,6 @@
 {
     "name": "orakaro/ioc",
-    "bin": ["bin"],
+    "bin": ["bin/IoCApp"],
     "description": "Tiny IoC module",
     "license": "MIT",
     "authors": [
