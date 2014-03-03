@@ -92,7 +92,7 @@ EOT;
         foreach ($methodCollection as $method) {
         $content .= <<<EOT
 \n
-/* IoC register for class {$class} and static method {$method}*/
+/* IoC register for {$class}::{$method} */
 IoC::register('{$class}_{$method}', function(){
     return {$class}::{$method}();
 });
