@@ -92,7 +92,7 @@ EOT;
         foreach ($methodCollection as $method) {
         $content .= <<<EOT
 \n
-/* Production register */
+/* IoC register for class {$class} and static method {$method}*/
 IoC::register('{$class}_{$method}', function(){
     return {$class}::{$method}();
 });
@@ -107,7 +107,7 @@ EOT;
         /* Class define */
         $content = <<<EOT
 \n
-/* Replacing real classes */
+/* Create IoC class for ${$class}*/
 class IoC{$class}{
 \n
 EOT;
@@ -125,7 +125,6 @@ EOT;
         /* Close class */
         $content .= <<<EOT
 }
-\n
 EOT;
 
         return $content;
