@@ -1,7 +1,5 @@
 <?php namespace orakaro\IoC\gentool;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 class Template{
 
     /* Content static varable */
