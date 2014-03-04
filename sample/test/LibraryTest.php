@@ -12,7 +12,7 @@ class LibraryTest extends PHPUnit_Framework_TestCase{
     /* Wake up lazy loading */
     Touchy::wakeMeUp();
     /* Redefined your desirable mock */
-    IoC::register('book_license', function($version){
+    IoC::register('Book_license', function($version){
       return 'mocked license';
     });
   }
