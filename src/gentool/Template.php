@@ -91,15 +91,15 @@ EOT;
         $content = '';
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
-        $r = new ReflectionMethod($class,$method);
-        $params = $r->getParameters();
-        $arguments = '';
-        foreach ($params as $param) {
-            $name = $param->getName();
-            $arguments .=  '$'.$name. ',';
-        }
-        $arguments = rtrim($arguments,',');
-        $content .= <<<EOT
+            $r = new \ReflectionMethod($class,$method);
+            $params = $r->getParameters();
+            $arguments = '';
+            foreach ($params as $param) {
+                $name = $param->getName();
+                $arguments .=  '$'.$name. ',';
+            }
+            $arguments = rtrim($arguments,',');
+            $content .= <<<EOT
 \n
 /* IoC register for {$class}::{$method} */
 IoC::register('{$class}_{$method}', function({$arguments}){
@@ -121,15 +121,15 @@ class IoC{$class}{
 \n
 EOT;
         /* Loop methodCollection */
-        $r = new ReflectionMethod($class,$method);
-        $params = $r->getParameters();
-        $arguments = '';
-        foreach ($params as $param) {
-            $name = $param->getName();
-            $arguments .=  '$'.$name. ',';
-        }
-        $arguments = rtrim($arguments,',');
         foreach ($methodCollection as $method) {
+            $r = new \ReflectionMethod($class,$method);
+            $params = $r->getParameters();
+            $arguments = '';
+            foreach ($params as $param) {
+                $name = $param->getName();
+                $arguments .=  '$'.$name. ',';
+            }
+            $arguments = rtrim($arguments,',');
             $content .= <<<EOT
     public static function {$method}()
     {
