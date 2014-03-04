@@ -79,6 +79,7 @@ class Touchy {
     public static function wakeMeUp()
     {
     }
+}
 EOT;
         Template::$content = $content;
     }
@@ -90,11 +91,19 @@ EOT;
         $content = '';
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
+        $r = new ReflectionMethod($class,$method);
+        $params = $r->getParameters();
+        $arguments = '';
+        foreach ($params as $param) {
+            $name = $param->getName();
+            $arguments .=  '$'.$name. ',';
+        }
+        $arguments = rtrim($arguments,',');
         $content .= <<<EOT
 \n
 /* IoC register for {$class}::{$method} */
-IoC::register('{$class}_{$method}', function(){
-    return {$class}::{$method}();
+IoC::register('{$class}_{$method}', function({$arguments}){
+    return {$class}::{$method}($arguments);
 });
 EOT;
         }
@@ -112,12 +121,20 @@ class IoC{$class}{
 \n
 EOT;
         /* Loop methodCollection */
+        $r = new ReflectionMethod($class,$method);
+        $params = $r->getParameters();
+        $arguments = '';
+        foreach ($params as $param) {
+            $name = $param->getName();
+            $arguments .=  '$'.$name. ',';
+        }
+        $arguments = rtrim($arguments,',');
         foreach ($methodCollection as $method) {
             $content .= <<<EOT
     public static function {$method}()
     {
         \$registedClosure = IoC::resolve('{$class}_{$method}');
-        return \$registedClosure();
+        return \$registedClosure($arguments);
     }
 \n
 EOT;
