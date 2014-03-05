@@ -136,7 +136,7 @@ EOT;
         foreach ($methodCollection as $method) {
             $arguments = self::getArguments($class,$method);
             $content .= <<<EOT
-    public static function {$method}()
+    public static function {$method}({$arguments})
     {
         \$registedClosure = IoC::resolve('{$class}_{$method}');
         return \$registedClosure($arguments);
