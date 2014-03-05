@@ -15,6 +15,9 @@
     "autoload": {
         "classmap": [
             "src"
-        ]
+        ],
+        "psr-4": {
+            "config\\": "config"
+        }
     }
 }
