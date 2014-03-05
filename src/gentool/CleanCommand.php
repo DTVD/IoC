@@ -32,7 +32,7 @@ class CleanCommand extends Command
             $output->writeln('You have to specify folder which has IoCConfig.php to delete! ');
             return;
         }
-        Template::clean($IoC_config_file_path);
+        $output->writeln(Template::clean($IoC_config_file_path));
     }
 
 
