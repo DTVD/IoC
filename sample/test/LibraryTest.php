@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 use orakaro\IoC\core\IoC;
+use config\facade\Touchy;
 
 class LibraryTest extends PHPUnit_Framework_TestCase{
   /**
