@@ -84,6 +84,25 @@ EOT;
         Template::$content = $content;
     }
 
+    /* Get arguments */
+    public static function getArguments($class,$method)
+    {
+        $r = new \ReflectionMethod($class,$method);
+        $params = $r->getParameters();
+        $arguments = '';
+        foreach ($params as $param) {
+            $name = $param->getName();
+            if ($param->isOptional()) {
+                $value = $param->getDefaultValue();
+                $arguments .=  '$'.$name.'='.$value.',';
+            } else {
+                $arguments .=  '$'.$name. ',';
+            }
+        }
+        return rtrim($arguments,',');
+
+    }
+
     /* Production Register */
     public static function register($class,$methodCollection)
     {
@@ -91,14 +110,7 @@ EOT;
         $content = '';
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
-            $r = new \ReflectionMethod($class,$method);
-            $params = $r->getParameters();
-            $arguments = '';
-            foreach ($params as $param) {
-                $name = $param->getName();
-                $arguments .=  '$'.$name. ',';
-            }
-            $arguments = rtrim($arguments,',');
+            $arguments = self::getArguments($class,$method);
             $content .= <<<EOT
 \n
 /* IoC register for {$class}::{$method} */
@@ -122,14 +134,7 @@ class IoC{$class}{
 EOT;
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
-            $r = new \ReflectionMethod($class,$method);
-            $params = $r->getParameters();
-            $arguments = '';
-            foreach ($params as $param) {
-                $name = $param->getName();
-                $arguments .=  '$'.$name. ',';
-            }
-            $arguments = rtrim($arguments,',');
+            $arguments = self::getArguments($class,$method);
             $content .= <<<EOT
     public static function {$method}()
     {
