@@ -34,7 +34,7 @@ class IoC {
       return $instance;
     }
 
-    throw new Exception('IoC register exception.');
+    throw new \Exception('IoC register exception.');
   }
 
   // Check resigtered or not
