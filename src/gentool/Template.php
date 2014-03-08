@@ -140,6 +140,10 @@ EOT;
     /* Production Register */
     public static function register($class,$methodCollection)
     {
+        /* In case $class come without namspace */
+        if (substr($class, 0, 1) !== '\\') {
+            $class = '\\'.$class;
+        };
         /* Init */
         $content = '';
         /* Loop methodCollection */
