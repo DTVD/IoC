@@ -24,6 +24,11 @@ class Template{
 
         /* Append IoC registers */
         foreach ($staticClasses as $class => $methods) {
+            /* In case $class come without namspace */
+            if (substr($class, 0, 1) !== '\\') {
+                $class = '\\'.$class;
+            };
+            /* Check if $methodCollection has one or more method */
             $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::register($class, $methodCollection);
         }
@@ -37,6 +42,11 @@ class Template{
 
         /* Write IoC class files */
         foreach ($staticClasses as $class => $methods) {
+            /* In case $class come without namspace */
+            if (substr($class, 0, 1) !== '\\') {
+                $class = '\\'.$class;
+            };
+            /* Check if $methodCollection has one or more method */
             $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::replace($class, $methodCollection);
             $filePath = $config_dir.'/'.$class.'.php';
@@ -140,10 +150,6 @@ EOT;
     /* Production Register */
     public static function register($class,$methodCollection)
     {
-        /* In case $class come without namspace */
-        if (substr($class, 0, 1) !== '\\') {
-            $class = '\\'.$class;
-        };
         /* Init */
         $content = '';
         /* Loop methodCollection */
