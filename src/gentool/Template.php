@@ -24,10 +24,6 @@ class Template{
 
         /* Append IoC registers */
         foreach ($staticClasses as $class => $methods) {
-            /* In case $class come without namspace */
-            if (substr($class, 0, 1) !== '\\') {
-                $class = '\\'.$class;
-            };
             /* Check if $methodCollection has one or more method */
             $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::register($class, $methodCollection);
@@ -42,10 +38,6 @@ class Template{
 
         /* Write IoC class files */
         foreach ($staticClasses as $class => $methods) {
-            /* In case $class come without namspace */
-            if (substr($class, 0, 1) !== '\\') {
-                $class = '\\'.$class;
-            };
             /* Check if $methodCollection has one or more method */
             $methodCollection = is_array($methods) ? $methods : array($methods);
             self::$content .= ContentBuilder::replace($class, $methodCollection);
@@ -108,7 +100,6 @@ class Template{
 }
 
 class ContentBuilder{
-
     /* Bootstrap */
     public static function bootstrap()
     {
@@ -126,6 +117,14 @@ class Touchy {
     }
 }
 EOT;
+    }
+
+    /* Get class name from namespaces */
+    public static function getClassName($namespacepath)
+    {
+        $ary = explode('\\', $namespacepath);
+        $className = count($ary)==1 ? '\\'.$ary[0] : $namespacepath;
+        return $className;
     }
 
     /* Get arguments */
@@ -152,6 +151,7 @@ EOT;
     {
         /* Init */
         $content = '';
+        $className = self::getClassName($class)
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
             $arguments = self::getArguments($class,$method);
@@ -159,7 +159,7 @@ EOT;
 \n
 /* IoC register for {$class}::{$method} */
 IoC::register('{$class}_{$method}', function({$arguments}){
-    return {$class}::{$method}($arguments);
+    return {$className}::{$method}($arguments);
 });
 EOT;
         }
