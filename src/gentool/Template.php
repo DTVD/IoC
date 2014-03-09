@@ -116,7 +116,7 @@ use orakaro\\IoC\core\\IoC;
 \n
 class IoCRegister{
     public static function registerAll()
-}
+    {
 EOT;
     }
 
@@ -152,8 +152,9 @@ EOT;
     public static function finish()
     {
         return <<<EOT
-    {
+\n
     }
+}
 EOT;
     }
 
