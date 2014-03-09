@@ -8,6 +8,11 @@ return array(
   /* List of classes and static methods that you want to mock */
   /* Key is class name and Value is method. Class can use with array of Methods */
   'static_classes' => array(
-    'Book' => 'license',
+    'Gandalf' => 'knownAs',
+    'Thorin' => 'knownAs',
+    'Bilbo' => 'knownAs',
+    'Thranduil' => 'knownAs',
+    'Smaug' => 'knownAs',
+    'Bard' => 'knownAs',
   ),
 );

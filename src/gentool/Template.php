@@ -151,7 +151,7 @@ EOT;
     {
         /* Init */
         $content = '';
-        $className = self::getClassName($class)
+        $className = self::getClassName($class);
         /* Loop methodCollection */
         foreach ($methodCollection as $method) {
             $arguments = self::getArguments($class,$method);
