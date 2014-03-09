@@ -10,13 +10,13 @@ class Template{
     /* Content generator */
     public static function genIoCConfig($config_dir, $staticClasses)
     {
-        /* Output to console */
+        /* Output */
         $output= '';
         if (!file_exists($config_dir)){
             mkdir($config_dir, 0777, true);
         }
 
-        /* Bootstrap Touchy.php */
+        /* Bootstrap IoCRegister.php */
         $ary = explode('/', $config_dir);
         self::$autoloadpath = str_repeat('/..', count($ary)). '/vendor/autoload.php';
         self::$namespace = implode('\\', $ary);
@@ -29,9 +29,12 @@ class Template{
             self::$content .= ContentBuilder::register($class, $methodCollection);
         }
 
-        /* Write Touchy.php */
-        $TouchyFilePath = $config_dir.'/Touchy.php';
-        $output.= self::writeToFile($TouchyFilePath);
+        /* Finish IoCRegister.php */
+        self::$content .= ContentBuilder::finish();
+
+        /* Write IoCRegister.php */
+        $IoCRegisterFilePath = $config_dir.'/IoCRegister.php';
+        $output.= self::writeToFile($IoCRegisterFilePath);
 
         /* Clear content */
         self::$content='';
@@ -100,6 +103,7 @@ class Template{
 }
 
 class ContentBuilder{
+
     /* Bootstrap */
     public static function bootstrap()
     {
@@ -110,11 +114,8 @@ class ContentBuilder{
 require_once __DIR__ . '{$autoloadpath}';
 use orakaro\\IoC\core\\IoC;
 \n
-/* Wake up lazy loading */
-class Touchy {
-    public static function wakeMeUp()
-    {
-    }
+class IoCRegister{
+    public static function registerAll()
 }
 EOT;
     }
@@ -125,6 +126,35 @@ EOT;
         $ary = explode('\\', $namespacepath);
         $className = count($ary)==1 ? '\\'.$ary[0] : $namespacepath;
         return $className;
+    }
+
+    /* Production Register */
+    public static function register($class,$methodCollection)
+    {
+        /* Init */
+        $content = '';
+        $className = self::getClassName($class);
+        /* Loop methodCollection */
+        foreach ($methodCollection as $method) {
+            $arguments = self::getArguments($class,$method);
+            $content .= <<<EOT
+\n
+    /* IoC register for {$class}::{$method} */
+    IoC::register('{$class}_{$method}', function({$arguments}){
+        return {$className}::{$method}($arguments);
+    });
+EOT;
+        }
+        return $content;
+    }
+
+    /* Finish */
+    public static function finish()
+    {
+        return <<<EOT
+    {
+    }
+EOT;
     }
 
     /* Get arguments */
@@ -144,26 +174,6 @@ EOT;
         }
         return rtrim($arguments,',');
 
-    }
-
-    /* Production Register */
-    public static function register($class,$methodCollection)
-    {
-        /* Init */
-        $content = '';
-        $className = self::getClassName($class);
-        /* Loop methodCollection */
-        foreach ($methodCollection as $method) {
-            $arguments = self::getArguments($class,$method);
-            $content .= <<<EOT
-\n
-/* IoC register for {$class}::{$method} */
-IoC::register('{$class}_{$method}', function({$arguments}){
-    return {$className}::{$method}($arguments);
-});
-EOT;
-        }
-        return $content;
     }
 
     /* Replacing real class */
