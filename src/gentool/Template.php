@@ -139,10 +139,10 @@ EOT;
             $arguments = self::getArguments($class,$method);
             $content .= <<<EOT
 \n
-    /* IoC register for {$class}::{$method} */
-    IoC::register('{$class}_{$method}', function({$arguments}){
-        return {$className}::{$method}($arguments);
-    });
+        /* IoC register for {$class}::{$method} */
+        IoC::register('{$class}_{$method}', function({$arguments}){
+            return {$className}::{$method}($arguments);
+        });
 EOT;
         }
         return $content;
