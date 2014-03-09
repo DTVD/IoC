@@ -1,5 +1,4 @@
-Inversion Of Control
-=====
+###Inversion Of Control
 
 _"Don't call me let me call you"_
 * Have you ever heard about Inversion Of Control / Dependency Injection in PHP ?
@@ -9,8 +8,8 @@ _"Don't call me let me call you"_
 
 I think I can help you a little bit ! Let's start :)
 
-Quick Start
-=====
+###Quick Start
+
 This tiny packge will provide an easy and lightweight way to implement IoC
 * Include following lines in your `composer.json`
 ```json
@@ -24,8 +23,8 @@ composer dump-autoload
 ```
 * Done ! Now head over Usage section !
 
-Usage
-=====
+###Usage
+
 
 Let me assume that you have some class like
 ```PHP
@@ -75,11 +74,10 @@ class Library{
     $book = IoCBook::getTitle($ISBN);
     return $book;
   }
-
 ```
 
-Why I need all that things ?
-=====
+###Why I need all that things ?
+
 The idea of IoC help us solve many problem like remove dependencies in codes, remove duplication, etc.. 
 With me it make sense especially in unittesting, where sometimes I have to face with some evil-static-call in classes.
 
