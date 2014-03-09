@@ -1,7 +1,9 @@
 {
     "name": "orakaro/ioc",
     "bin": ["IoCApp"],
-    "description": "Tiny IoC module",
+    "description": "Tiny IoC module for static mocking in PHP",
+    "keywords": ["IoC", "Inversion of Control", "Dependency Injection", "Facades Design Pattern"],
+    "homepage": "https://github.com/DTVD/IoC",
     "license": "MIT",
     "authors": [
         {
