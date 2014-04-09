@@ -91,3 +91,7 @@ Check out [one-minute tutorial](https://github.com/DTVD/Misty-Mountains-Cold) !
 
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/DTVD/ioc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
