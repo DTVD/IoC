@@ -1,4 +1,4 @@
-###Inversion Of Control
+###Inversion Of Control  [![Build Status](https://travis-ci.org/DTVD/IoC.svg?branch=master)](https://travis-ci.org/DTVD/IoC)
 
 _"Don't call me let me call you"_
 * Have you ever heard about Inversion Of Control / Dependency Injection in PHP ?
