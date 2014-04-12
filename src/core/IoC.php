@@ -7,19 +7,19 @@ class IoC {
   protected static $registry = array();
   protected static $shared = array();
 
-  // Register
+  /* Register */
   public static function register($name, \Closure $resolve)
   {
      static::$registry[$name] = $resolve;
   }
 
-  // Singleton
+  /* Singleton */
   public static function singleton($name, \Closure $resolve)
   {
     static::$shared[$name] = $resolve();
   }
 
-  // Resolve, consider register or singleton here
+  /* Resolve, consider register or singleton here */
   public static function resolve($name)
   {
     if ( static::registered($name) )
@@ -37,13 +37,13 @@ class IoC {
     throw new \Exception('IoC register exception.');
   }
 
-  // Check resigtered or not
+  /* Check resigtered or not */
   public static function registered($name)
   {
     return array_key_exists($name, static::$registry);
   }
 
-  // Check singleton object or not
+  /* Check singleton object or not */
   public static function singletoned($name)
   {
     return array_key_exists($name, static::$shared);
