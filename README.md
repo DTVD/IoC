@@ -1,4 +1,8 @@
-###Inversion Of Control  [![Build Status](https://travis-ci.org/DTVD/IoC.svg?branch=master)](https://travis-ci.org/DTVD/IoC)
+###Inversion Of Control  
+
+[![Build Status](https://travis-ci.org/DTVD/IoC.svg?branch=master)](https://travis-ci.org/DTVD/IoC)
+[![Monthly Downloads](https://poser.pugx.org/leaphly/cart-bundle/d/monthly.png)](https://packagist.org/packages/orakaro/ioc)
+[![License](https://poser.pugx.org/leaphly/cart-bundle/license.png)](https://packagist.org/packages/orakaro/ioc)
 
 _"Don't call me let me call you"_
 * Have you ever heard about Inversion Of Control / Dependency Injection in PHP ?
