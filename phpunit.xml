@@ -14,7 +14,7 @@
 
   <testsuites>
     <testsuite name="IoC Test Suite">
-      <directory>./</directory>
+      <directory>./test</directory>
     </testsuite>
   </testsuites>
 
