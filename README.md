@@ -38,7 +38,7 @@ class Library{
     $book = Book::getTitle($ISBN);
     return $book;
   }
-
+}
 ```
 Note that ```overview``` method is using ```Book```class's static method ```getTItle``` here. 
 
