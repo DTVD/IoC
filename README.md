@@ -44,6 +44,7 @@ Note that ```overview``` method is using ```Book```class's static method ```getT
 
 Now let's create another file call IoCRegister.php 
 ```PHP
+<?php
 require_once __DIR__ . '/vendor/autoload.php';//Shoule be correct path to composer autoload!
 use orakaro\IoC\core\IoC;
 
@@ -77,6 +78,7 @@ class Library{
     $book = IoCBook::getTitle($ISBN);
     return $book;
   }
+}
 ```
 
 ###Why I need all that things ?
